@@ -2979,7 +2979,7 @@ VERBOSE: powershell.exe -Command "Get-WindowsUpdate -Criteria \"(UpdateID = 'ddb
         <maml:title>----------  EXAMPLE 8  ----------</maml:title>
         <dev:code>Schedule Job to install all available updates and automatically reboot system if needed. Also send report after installation (but before reboot if needed) and send second instalation history report after reboot.
 
-@{SmtpServer="your.smtp.server";From="sender@email.address";To="recipient@email.address";Port=25} | Export-Clixml -Path 'C:\Program Files\WindowsPowerShell\Modules\PSWindowsUpdate\PSWUSettings.xml'
+Set-PSWUSettings -SmtpServer smtp.office365.com -SmtpPort 587 -SmtpEnableSsl $true -SmtpSubject "PSWindowsUpdate Report" -SmtpTo mgajda@psmvp.pl -SmtpFrom mgajda@psmvp.pl -SmtpCredential (Get-Credential mgajda@psmvp.pl)
 Install-WindowsUpdate -MicrosoftUpdate -SendReport -SendHistory -AcceptAll -AutoReboot -ScheduleJob (Get-Date -Hour 18 -Minute 30 -Second 0) -ComputerName MG-PC -Verbose
  
 VERBOSE: MG-PC: Connecting to Microsoft Update server. Please wait...
@@ -9739,6 +9739,105 @@ UseWUServer                   : 1</dev:code>
           <maml:description>
             <maml:para>Enabled - The WSUS server distributes available signed non-Microsoft updates.</maml:para>
             <maml:para>Disabled - The WSUS server does not distribute available signed non-Microsoft updates.</maml:para>
+            <maml:para>Supported on: At least Windows Server 2003 operating systems or Windows XP Professional with SP1, excluding Windows RT</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ActiveHoursEnd -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ActiveHoursEnd</maml:name>
+          <maml:description>
+            <maml:para>If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ActiveHoursMaxRange -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ActiveHoursMaxRange</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to specify the maximum number of hours from the start time that users can set their active hours. The max active hours range can be set between 8 and 18 hours.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ActiveHoursStart -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ActiveHoursStart</maml:name>
+          <maml:description>
+            <maml:para>If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: AllowAutoWindowsUpdateDownloadOverMeteredNetwork -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AllowAutoWindowsUpdateDownloadOverMeteredNetwork</maml:name>
+          <maml:description>
+            <maml:para>Enabling this policy will automatically download updates, even over metered data connections (charges may apply).</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server, Windows 10 or Windows 10 RT</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: AlwaysAutoRebootAtScheduledTime -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AlwaysAutoRebootAtScheduledTime</maml:name>
+          <maml:description>
+            <maml:para>If you enable this policy, a restart timer will always begin immediately after Windows Update installs important updates, instead of first notifying users on the login screen for at least two days..</maml:para>
+            <maml:para>Supported on: At least Windows Server 2012, Windows 8 or Windows RT</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: AlwaysAutoRebootAtScheduledTimeMinutes -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AlwaysAutoRebootAtScheduledTimeMinutes</maml:name>
+          <maml:description>
+            <maml:para>The restart timer can be configured to start with any value from 15 to 180 minutes. When the timer runs out, the restart will proceed even if the PC has signed-in users.</maml:para>
+            <maml:para>Supported on: At least Windows Server 2012, Windows 8 or Windows RT​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: AUPowerManagement -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AUPowerManagement</maml:name>
+          <maml:description>
+            <maml:para>Specifies whether the Windows Update will use the Windows Power Management features to automatically wake up the system from sleep, if there are updates scheduled for installation.</maml:para>
+            <maml:para>Supported on: Windows Server 2008, Windows 7, Windows Vista, and Windows 10</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9752,6 +9851,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>AutoInstallMinorUpdates</maml:name>
           <maml:description>
             <maml:para>Silently install minor updates.</maml:para>
+            <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above.</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9759,6 +9859,33 @@ UseWUServer                   : 1</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: AutoRestartNotificationSchedule -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AutoRestartNotificationSchedule</maml:name>
+          <maml:description>
+            <maml:para>Specifies the type of notification used when notifying the user about a scheduled restart to install updates.</maml:para>
+            <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: AutoRestartRequiredNotificationDismissal -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AutoRestartRequiredNotificationDismissal</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to specify the method by which the auto-restart required notification is dismissed. When a restart is required to install updates, the auto-restart required notification is displayed. By default, the notification is automatically dismissed after 25 seconds.</maml:para>
+            <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
         </command:parameter>
         <!-- Parameter: ComputerName -->
         <command:parameter required="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
@@ -9785,11 +9912,82 @@ UseWUServer                   : 1</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <!-- Parameter: DeferFeatureUpdatesPeriodInDays -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>DeferFeatureUpdatesPeriodInDays</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to specify when to receive Feature Updates.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: DeferQualityUpdatesPeriodInDays -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>DeferQualityUpdatesPeriodInDays</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to specify when to receive quality updates.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: DeferUpdatePeriod -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>DeferUpdatePeriod</maml:name>
+          <maml:description>
+            <maml:para>Allows IT Admins to specify update delays for up to four weeks. Supported values are 0-4, which refers to the number of weeks to defer updates.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: DeferUpgrade -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>DeferUpgrade</maml:name>
+          <maml:description>
+            <maml:para>You can also choose to delay updates for up to one month. If you do not delay updates, your PC will remain up to date with security updates as they become available.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: DeferUpgradePeriod -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>DeferUpgradePeriod</maml:name>
+          <maml:description>
+            <maml:para>Allows IT Admins to specify additional upgrade delays for up to 8 months. Supported values are 0-8, which refers to the number of months to defer upgrades.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
         <!-- Parameter: DetectionFrequency -->
         <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
           <maml:name>DetectionFrequency</maml:name>
           <maml:description>
             <maml:para>Time between detection cycles. Time in hours (1–22).</maml:para>
+            <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
           </maml:description>
           <command:parameterValue required="true">int</command:parameterValue>
           <dev:type>
@@ -9803,6 +10001,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>DetectionFrequencyEnabled</maml:name>
           <maml:description>
             <maml:para>Enable/Disable detection frequency.</maml:para>
+            <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9816,6 +10015,49 @@ UseWUServer                   : 1</dev:code>
           <maml:name>DisableWindowsUpdateAccess</maml:name>
           <maml:description>
             <maml:para>Disables/Enables access to Windows Update.</maml:para>
+            <maml:para>Supported on: At least Windows Server 2003 operating systems, Windows XP Professional Service Pack 1, or Windows 2000 Service Pack 3</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: DisableWUfBSafeguards -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>DisableWUfBSafeguards</maml:name>
+          <maml:description>
+            <maml:para>This policy setting specifies that a Windows Update for Business device should skip safeguards.</maml:para>
+            <maml:para>Supported on: At least Windows Server, Windows 10 Version 1903​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ElevateNonAdmins -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ElevateNonAdmins</maml:name>
+          <maml:description>
+            <maml:para>This policy setting allows you to control whether non-administrative users will receive update notifications based on the "Configure Automatic Updates" policy setting.</maml:para>
+            <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above..</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: EnableFeaturedSoftware -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>EnableFeaturedSoftware</maml:name>
+          <maml:description>
+            <maml:para>This policy setting allows you to control whether users see detailed enhanced notification messages about featured software from the Microsoft Update service.</maml:para>
+            <maml:para>Supported on: Windows Server 2008, Windows 7, and Windows Vista​</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9829,6 +10071,39 @@ UseWUServer                   : 1</dev:code>
           <maml:name>IncludeRecommendedUpdates</maml:name>
           <maml:description>
             <maml:para>Enable/Disable recommended updates.</maml:para>
+            <maml:para>Supported on: At least Windows Vista through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ManagePreviewBuilds -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ManagePreviewBuilds</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to manage which updates you receive prior to the update being released to the world.</maml:para>
+            <maml:para>0	Disable Preview builds.</maml:para>
+            <maml:para>1	Disable Preview builds once the next release is public.</maml:para>
+            <maml:para>2	Enable Preview builds.</maml:para>
+            <maml:para>3 (Default) Preview builds is left to user selection.</maml:para>
+            <maml:para>Supported on: At least Windows Server, Windows 10 Version 1709​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: NoAUShutdownOption -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>NoAUShutdownOption</maml:name>
+          <maml:description>
+            <maml:para>This policy setting allows you to manage whether the 'Install Updates and Shut Down' option is displayed in the Shut Down Windows dialog box.</maml:para>
+            <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows XP SP2</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9842,6 +10117,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>NoAutoRebootWithLoggedOnUsers</maml:name>
           <maml:description>
             <maml:para>Logged-on user can decide whether to restart the client computer.</maml:para>
+            <maml:para>Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3​</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9855,20 +10131,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>NoAutoUpdate</maml:name>
           <maml:description>
             <maml:para>Enable/Disable Automatic Updates.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
-          <dev:type>
-            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <!-- Parameter: NonAdministratorsElevated -->
-        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
-          <maml:name>NonAdministratorsElevated</maml:name>
-          <maml:description>
-            <maml:para>Enabled - All members of the Users security group can approve or disapprove updates.</maml:para>
-            <maml:para>Disabled - Only members of the Administrators security group can approve or disapprove updates.</maml:para>
+            <maml:para>Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 Option 7 only supported on servers of at least Windows Server 2016 edition​</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9882,6 +10145,34 @@ UseWUServer                   : 1</dev:code>
           <maml:name>NotificationLevel</maml:name>
           <maml:description>
             <maml:para>Notify mode: "Not configured", "Disabled", "Notify before download", "Notify before installation", "Scheduled installation", "Users configure"</maml:para>
+            <maml:para>Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 Option 7 only supported on servers of at least Windows Server 2016 edition​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: PauseDeferrals -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>PauseDeferrals</maml:name>
+          <maml:description>
+            <maml:para>Allows IT Admins to pause updates and upgrades for up to 5 weeks.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ProductVersion -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ProductVersion</maml:name>
+          <maml:description>
+            <maml:para>ProductVersion allow to control maximum version of Feature updates. For example "Windows 11" or "11" or "Windows 10".</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
           </maml:description>
           <command:parameterValue required="true">string</command:parameterValue>
           <dev:type>
@@ -9908,6 +10199,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>RebootRelaunchTimeout</maml:name>
           <maml:description>
             <maml:para>Time between prompts for a scheduled restart. Time in minutes (1–1440).</maml:para>
+            <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</maml:para>
           </maml:description>
           <command:parameterValue required="true">int</command:parameterValue>
           <dev:type>
@@ -9920,7 +10212,8 @@ UseWUServer                   : 1</dev:code>
         <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
           <maml:name>RebootRelaunchTimeoutEnabled</maml:name>
           <maml:description>
-            <maml:para>Enable/Disable RebootRelaunchTimeout.</maml:para>
+            <maml:para>Specifies the amount of time for Automatic Updates to wait before prompting again with a scheduled restart.</maml:para>
+            <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9934,6 +10227,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>RebootWarningTimeout</maml:name>
           <maml:description>
             <maml:para>Length, in minutes, of the restart warning countdown after updates have been installed that have a deadline or scheduled updates. Time in minutes (1–30).</maml:para>
+            <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3​</maml:para>
           </maml:description>
           <command:parameterValue required="true">int</command:parameterValue>
           <dev:type>
@@ -9947,6 +10241,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>RebootWarningTimeoutEnabled</maml:name>
           <maml:description>
             <maml:para>Enable/Disable RebootWarningTimeout.</maml:para>
+            <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3​</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -9959,7 +10254,8 @@ UseWUServer                   : 1</dev:code>
         <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
           <maml:name>RescheduleWaitTime</maml:name>
           <maml:description>
-            <maml:para>Time in minutes that Automatic Updates waits at startup before it applies updates from a missed scheduled installation time. Time in minutes (1–60).</maml:para>
+            <maml:para>Specifies the amount of time for Automatic Updates to wait, following system startup, before proceeding with a scheduled installation that was missed previously.</maml:para>
+            <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</maml:para>
           </maml:description>
           <command:parameterValue required="true">int</command:parameterValue>
           <dev:type>
@@ -9967,6 +10263,20 @@ UseWUServer                   : 1</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: RescheduleWaitTimeEnabled -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>RescheduleWaitTimeEnabled</maml:name>
+          <maml:description>
+            <maml:para>Specifies the amount of time for Automatic Updates to wait, following system startup, before proceeding with a scheduled installation that was missed previously.</maml:para>
+            <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <!-- Parameter: ScheduledInstallDay -->
         <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
@@ -9995,6 +10305,34 @@ UseWUServer                   : 1</dev:code>
           </dev:type>
           <dev:defaultValue>0</dev:defaultValue>
         </command:parameter>
+        <!-- Parameter: ScheduleImminentRestartWarning -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ScheduleImminentRestartWarning</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline. 15 Minutes (Default), 30 Minutes or 60 Minutes.</maml:para>
+            <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: ScheduleRestartWarning -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ScheduleRestartWarning</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline. 2 Hours, 4 Hours (Default), 8 Hours, 12 Hours, 24 Hours.</maml:para>
+            <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">int</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
         <!-- Parameter: SendReport -->
         <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
           <maml:name>SendReport</maml:name>
@@ -10009,11 +10347,208 @@ UseWUServer                   : 1</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <!-- Parameter: SetActiveHours -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetActiveHours</maml:name>
+          <maml:description>
+            <maml:para>If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetActiveHoursMaxRange -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetActiveHoursMaxRange</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to specify the maximum number of hours from the start time that users can set their active hours. The max active hours range can be set between 8 and 18 hours.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetAutoRestartNotificationConfig -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetAutoRestartNotificationConfig</maml:name>
+          <maml:description>
+            <maml:para>Specifies the type of notification used when notifying the user about a scheduled restart to install updates.</maml:para>
+            <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetAutoRestartNotificationDisable -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetAutoRestartNotificationDisable</maml:name>
+          <maml:description>
+            <maml:para>This policy setting allows you to control whether users receive notifications for auto restarts for update installations including reminder and warning notifications.</maml:para>
+            <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetAutoRestartRequiredNotificationDismissal -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetAutoRestartRequiredNotificationDismissal</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to specify the method by which the auto-restart required notification is dismissed. When a restart is required to install updates, the auto-restart required notification is displayed. By default, the notification is automatically dismissed after 25 seconds.</maml:para>
+            <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetDisablePauseUXAccess -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetDisablePauseUXAccess</maml:name>
+          <maml:description>
+            <maml:para>This setting allows to remove access to "Pause updates" feature. Once enabled user access to pause updates is removed.</maml:para>
+            <maml:para>Supported on: At least Windows Server, Windows 10 Version 1809</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetDisableUXWUAccess -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetDisableUXWUAccess</maml:name>
+          <maml:description>
+            <maml:para>This setting allows you to remove access to scan Windows Update. If you enable this setting, Windows Update scan access is removed.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetEDURestart -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetEDURestart</maml:name>
+          <maml:description>
+            <maml:para>Enabling this policy for EDU devices that remain on Carts overnight will skip power checks to ensure update reboots will happen at the scheduled install time.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server, Windows 10 or Windows 10 RT​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetPolicyDrivenUpdateSourceForDriverUpdates -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetPolicyDrivenUpdateSourceForDriverUpdates</maml:name>
+          <maml:description>
+            <maml:para>Configure this policy to specify whether to receive Windows Driver Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</maml:para>
+            <maml:para>Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetPolicyDrivenUpdateSourceForFeatureUpdates -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetPolicyDrivenUpdateSourceForFeatureUpdates</maml:name>
+          <maml:description>
+            <maml:para>Configure this policy to specify whether to receive Windows Feature Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</maml:para>
+            <maml:para>Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetPolicyDrivenUpdateSourceForOtherUpdates -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetPolicyDrivenUpdateSourceForOtherUpdates</maml:name>
+          <maml:description>
+            <maml:para>Configure this policy to specify whether to receive Other Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</maml:para>
+            <maml:para>Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetPolicyDrivenUpdateSourceForQualityUpdates -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetPolicyDrivenUpdateSourceForQualityUpdates</maml:name>
+          <maml:description>
+            <maml:para>Configure this policy to specify whether to receive Windows Quality Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</maml:para>
+            <maml:para>Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetRestartWarningSchd -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetRestartWarningSchd</maml:name>
+          <maml:description>
+            <maml:para>Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline.</maml:para>
+            <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: SetUpdateNotificationLevel -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>SetUpdateNotificationLevel</maml:name>
+          <maml:description>
+            <maml:para>This policy allows you to define what Windows Update notifications users see. This policy doesn't control how and when updates are downloaded and installed.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
         <!-- Parameter: TargetGroup -->
         <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
           <maml:name>TargetGroup</maml:name>
           <maml:description>
             <maml:para>Name of the computer group to which the computer belongs.</maml:para>
+            <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
           </maml:description>
           <command:parameterValue required="true">string</command:parameterValue>
           <dev:type>
@@ -10026,6 +10561,61 @@ UseWUServer                   : 1</dev:code>
           <maml:name>TargetGroupEnabled</maml:name>
           <maml:description>
             <maml:para>Use/Do not use client-side targeting.</maml:para>
+            <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: TargetReleaseVersion -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>TargetReleaseVersion</maml:name>
+          <maml:description>
+            <maml:para>Enable settings for control maximum version of Feature updates.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <!-- Parameter: TargetReleaseVersionInfo -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>TargetReleaseVersionInfo</maml:name>
+          <maml:description>
+            <maml:para>TargetReleaseVersionInfo allow to control maximum version of Feature updates. For example "22H2".</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: UpdateNotificationLevel -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>UpdateNotificationLevel</maml:name>
+          <maml:description>
+            <maml:para>This policy allows you to define what Windows Update notifications users see. This policy doesn't control how and when updates are downloaded and installed.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">string</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+        </command:parameter>
+        <!-- Parameter: UseUpdateClassPolicySource -->
+        <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>UseUpdateClassPolicySource</maml:name>
+          <maml:description>
+            <maml:para>When this policy is enabled, devices will receive Windows updates for the classes listed from the specified update source: either Windows Update or Windows Server Update Service.</maml:para>
+            <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -10039,6 +10629,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>UseWUServer</maml:name>
           <maml:description>
             <maml:para>The computer gets its updates from a WSUS server or from Microsoft Update.</maml:para>
+            <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
           </maml:description>
           <command:parameterValue required="true">SwitchParameter</command:parameterValue>
           <dev:type>
@@ -10052,6 +10643,7 @@ UseWUServer                   : 1</dev:code>
           <maml:name>WUServer</maml:name>
           <maml:description>
             <maml:para>HTTP(S) URL of the WSUS server that is used by Automatic Updates and API callers (by default).</maml:para>
+            <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
           </maml:description>
           <command:parameterValue required="true">string</command:parameterValue>
           <dev:type>
@@ -10108,6 +10700,7 @@ UseWUServer                   : 1</dev:code>
         <maml:description>
           <maml:para>Enabled - The WSUS server distributes available signed non-Microsoft updates.</maml:para>
           <maml:para>Disabled - The WSUS server does not distribute available signed non-Microsoft updates.</maml:para>
+          <maml:para>Supported on: At least Windows Server 2003 operating systems or Windows XP Professional with SP1, excluding Windows RT</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10121,6 +10714,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>DisableWindowsUpdateAccess</maml:name>
         <maml:description>
           <maml:para>Disables/Enables access to Windows Update.</maml:para>
+          <maml:para>Supported on: At least Windows Server 2003 operating systems, Windows XP Professional Service Pack 1, or Windows 2000 Service Pack 3</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10129,12 +10723,12 @@ UseWUServer                   : 1</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <!-- Parameter: NonAdministratorsElevated -->
+      <!-- Parameter: ElevateNonAdmins -->
       <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
-        <maml:name>NonAdministratorsElevated</maml:name>
+        <maml:name>ElevateNonAdmins</maml:name>
         <maml:description>
-          <maml:para>Enabled - All members of the Users security group can approve or disapprove updates.</maml:para>
-          <maml:para>Disabled - Only members of the Administrators security group can approve or disapprove updates.</maml:para>
+          <maml:para>This policy setting allows you to control whether non-administrative users will receive update notifications based on the "Configure Automatic Updates" policy setting.</maml:para>
+          <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above..</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10148,6 +10742,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>TargetGroup</maml:name>
         <maml:description>
           <maml:para>Name of the computer group to which the computer belongs.</maml:para>
+          <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
         </maml:description>
         <command:parameterValue required="true">string</command:parameterValue>
         <dev:type>
@@ -10160,6 +10755,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>TargetGroupEnabled</maml:name>
         <maml:description>
           <maml:para>Use/Do not use client-side targeting.</maml:para>
+          <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10173,6 +10769,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>WUServer</maml:name>
         <maml:description>
           <maml:para>HTTP(S) URL of the WSUS server that is used by Automatic Updates and API callers (by default).</maml:para>
+          <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
         </maml:description>
         <command:parameterValue required="true">string</command:parameterValue>
         <dev:type>
@@ -10185,6 +10782,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>NotificationLevel</maml:name>
         <maml:description>
           <maml:para>Notify mode: "Not configured", "Disabled", "Notify before download", "Notify before installation", "Scheduled installation", "Users configure"</maml:para>
+          <maml:para>Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 Option 7 only supported on servers of at least Windows Server 2016 edition​</maml:para>
         </maml:description>
         <command:parameterValue required="true">string</command:parameterValue>
         <dev:type>
@@ -10196,6 +10794,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>AUOptions</maml:name>
         <maml:description>
           <maml:para>Notify mode: "Not configured", "Disabled", "Notify before download", "Notify before installation", "Scheduled installation", "Users configure"</maml:para>
+          <maml:para>Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 Option 7 only supported on servers of at least Windows Server 2016 edition​</maml:para>
           <maml:para>This is an alias of the NotificationLevel parameter.</maml:para>
         </maml:description>
         <command:parameterValue required="true">string</command:parameterValue>
@@ -10209,6 +10808,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>AutoInstallMinorUpdates</maml:name>
         <maml:description>
           <maml:para>Silently install minor updates.</maml:para>
+          <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above.</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10222,6 +10822,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>DetectionFrequency</maml:name>
         <maml:description>
           <maml:para>Time between detection cycles. Time in hours (1–22).</maml:para>
+          <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
         </maml:description>
         <command:parameterValue required="true">int</command:parameterValue>
         <dev:type>
@@ -10235,6 +10836,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>DetectionFrequencyEnabled</maml:name>
         <maml:description>
           <maml:para>Enable/Disable detection frequency.</maml:para>
+          <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10248,6 +10850,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>IncludeRecommendedUpdates</maml:name>
         <maml:description>
           <maml:para>Enable/Disable recommended updates.</maml:para>
+          <maml:para>Supported on: At least Windows Vista through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above.</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10261,6 +10864,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>NoAutoRebootWithLoggedOnUsers</maml:name>
         <maml:description>
           <maml:para>Logged-on user can decide whether to restart the client computer.</maml:para>
+          <maml:para>Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3​</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10274,6 +10878,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>NoAutoUpdate</maml:name>
         <maml:description>
           <maml:para>Enable/Disable Automatic Updates.</maml:para>
+          <maml:para>Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 Option 7 only supported on servers of at least Windows Server 2016 edition​</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10287,6 +10892,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>RebootRelaunchTimeout</maml:name>
         <maml:description>
           <maml:para>Time between prompts for a scheduled restart. Time in minutes (1–1440).</maml:para>
+          <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</maml:para>
         </maml:description>
         <command:parameterValue required="true">int</command:parameterValue>
         <dev:type>
@@ -10299,7 +10905,8 @@ UseWUServer                   : 1</dev:code>
       <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
         <maml:name>RebootRelaunchTimeoutEnabled</maml:name>
         <maml:description>
-          <maml:para>Enable/Disable RebootRelaunchTimeout.</maml:para>
+          <maml:para>Specifies the amount of time for Automatic Updates to wait before prompting again with a scheduled restart.</maml:para>
+          <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10313,6 +10920,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>RebootWarningTimeout</maml:name>
         <maml:description>
           <maml:para>Length, in minutes, of the restart warning countdown after updates have been installed that have a deadline or scheduled updates. Time in minutes (1–30).</maml:para>
+          <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3​</maml:para>
         </maml:description>
         <command:parameterValue required="true">int</command:parameterValue>
         <dev:type>
@@ -10326,6 +10934,7 @@ UseWUServer                   : 1</dev:code>
         <maml:name>RebootWarningTimeoutEnabled</maml:name>
         <maml:description>
           <maml:para>Enable/Disable RebootWarningTimeout.</maml:para>
+          <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3​</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10333,19 +10942,6 @@ UseWUServer                   : 1</dev:code>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <!-- Parameter: RescheduleWaitTime -->
-      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
-        <maml:name>RescheduleWaitTime</maml:name>
-        <maml:description>
-          <maml:para>Time in minutes that Automatic Updates waits at startup before it applies updates from a missed scheduled installation time. Time in minutes (1–60).</maml:para>
-        </maml:description>
-        <command:parameterValue required="true">int</command:parameterValue>
-        <dev:type>
-          <maml:name>System.Int32</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
       </command:parameter>
       <!-- Parameter: ScheduledInstallDay -->
       <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
@@ -10379,6 +10975,595 @@ UseWUServer                   : 1</dev:code>
         <maml:name>UseWUServer</maml:name>
         <maml:description>
           <maml:para>The computer gets its updates from a WSUS server or from Microsoft Update.</maml:para>
+          <maml:para>Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: TargetReleaseVersion -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>TargetReleaseVersion</maml:name>
+        <maml:description>
+          <maml:para>Enable settings for control maximum version of Feature updates.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: TargetReleaseVersionInfo -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>TargetReleaseVersionInfo</maml:name>
+        <maml:description>
+          <maml:para>TargetReleaseVersionInfo allow to control maximum version of Feature updates. For example "22H2".</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: ProductVersion -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ProductVersion</maml:name>
+        <maml:description>
+          <maml:para>ProductVersion allow to control maximum version of Feature updates. For example "Windows 11" or "11" or "Windows 10".</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: DeferFeatureUpdatesPeriodInDays -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DeferFeatureUpdatesPeriodInDays</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to specify when to receive Feature Updates.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: DeferQualityUpdatesPeriodInDays -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DeferQualityUpdatesPeriodInDays</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to specify when to receive quality updates.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: DisableWUfBSafeguards -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DisableWUfBSafeguards</maml:name>
+        <maml:description>
+          <maml:para>This policy setting specifies that a Windows Update for Business device should skip safeguards.</maml:para>
+          <maml:para>Supported on: At least Windows Server, Windows 10 Version 1903​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ManagePreviewBuilds -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ManagePreviewBuilds</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to manage which updates you receive prior to the update being released to the world.</maml:para>
+          <maml:para>0	Disable Preview builds.</maml:para>
+          <maml:para>1	Disable Preview builds once the next release is public.</maml:para>
+          <maml:para>2	Enable Preview builds.</maml:para>
+          <maml:para>3 (Default) Preview builds is left to user selection.</maml:para>
+          <maml:para>Supported on: At least Windows Server, Windows 10 Version 1709​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: AllowAutoWindowsUpdateDownloadOverMeteredNetwork -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>AllowAutoWindowsUpdateDownloadOverMeteredNetwork</maml:name>
+        <maml:description>
+          <maml:para>Enabling this policy will automatically download updates, even over metered data connections (charges may apply).</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server, Windows 10 or Windows 10 RT</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: AlwaysAutoRebootAtScheduledTime -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>AlwaysAutoRebootAtScheduledTime</maml:name>
+        <maml:description>
+          <maml:para>If you enable this policy, a restart timer will always begin immediately after Windows Update installs important updates, instead of first notifying users on the login screen for at least two days..</maml:para>
+          <maml:para>Supported on: At least Windows Server 2012, Windows 8 or Windows RT</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: AlwaysAutoRebootAtScheduledTimeMinutes -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>AlwaysAutoRebootAtScheduledTimeMinutes</maml:name>
+        <maml:description>
+          <maml:para>The restart timer can be configured to start with any value from 15 to 180 minutes. When the timer runs out, the restart will proceed even if the PC has signed-in users.</maml:para>
+          <maml:para>Supported on: At least Windows Server 2012, Windows 8 or Windows RT​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetAutoRestartNotificationConfig -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetAutoRestartNotificationConfig</maml:name>
+        <maml:description>
+          <maml:para>Specifies the type of notification used when notifying the user about a scheduled restart to install updates.</maml:para>
+          <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: AutoRestartNotificationSchedule -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>AutoRestartNotificationSchedule</maml:name>
+        <maml:description>
+          <maml:para>Specifies the type of notification used when notifying the user about a scheduled restart to install updates.</maml:para>
+          <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetAutoRestartRequiredNotificationDismissal -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetAutoRestartRequiredNotificationDismissal</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to specify the method by which the auto-restart required notification is dismissed. When a restart is required to install updates, the auto-restart required notification is displayed. By default, the notification is automatically dismissed after 25 seconds.</maml:para>
+          <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: AutoRestartRequiredNotificationDismissal -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>AutoRestartRequiredNotificationDismissal</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to specify the method by which the auto-restart required notification is dismissed. When a restart is required to install updates, the auto-restart required notification is displayed. By default, the notification is automatically dismissed after 25 seconds.</maml:para>
+          <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: SetRestartWarningSchd -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetRestartWarningSchd</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline.</maml:para>
+          <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ScheduleRestartWarning -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ScheduleRestartWarning</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline. 2 Hours, 4 Hours (Default), 8 Hours, 12 Hours, 24 Hours.</maml:para>
+          <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ScheduleImminentRestartWarning -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ScheduleImminentRestartWarning</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline. 15 Minutes (Default), 30 Minutes or 60 Minutes.</maml:para>
+          <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: DeferUpgrade -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DeferUpgrade</maml:name>
+        <maml:description>
+          <maml:para>You can also choose to delay updates for up to one month. If you do not delay updates, your PC will remain up to date with security updates as they become available.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: DeferUpgradePeriod -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DeferUpgradePeriod</maml:name>
+        <maml:description>
+          <maml:para>Allows IT Admins to specify additional upgrade delays for up to 8 months. Supported values are 0-8, which refers to the number of months to defer upgrades.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: DeferUpdatePeriod -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DeferUpdatePeriod</maml:name>
+        <maml:description>
+          <maml:para>Allows IT Admins to specify update delays for up to four weeks. Supported values are 0-4, which refers to the number of weeks to defer updates.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: PauseDeferrals -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>PauseDeferrals</maml:name>
+        <maml:description>
+          <maml:para>Allows IT Admins to pause updates and upgrades for up to 5 weeks.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetUpdateNotificationLevel -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetUpdateNotificationLevel</maml:name>
+        <maml:description>
+          <maml:para>This policy allows you to define what Windows Update notifications users see. This policy doesn't control how and when updates are downloaded and installed.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: UpdateNotificationLevel -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>UpdateNotificationLevel</maml:name>
+        <maml:description>
+          <maml:para>This policy allows you to define what Windows Update notifications users see. This policy doesn't control how and when updates are downloaded and installed.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <!-- Parameter: NoAUShutdownOption -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>NoAUShutdownOption</maml:name>
+        <maml:description>
+          <maml:para>This policy setting allows you to manage whether the 'Install Updates and Shut Down' option is displayed in the Shut Down Windows dialog box.</maml:para>
+          <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows XP SP2</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: AUPowerManagement -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>AUPowerManagement</maml:name>
+        <maml:description>
+          <maml:para>Specifies whether the Windows Update will use the Windows Power Management features to automatically wake up the system from sleep, if there are updates scheduled for installation.</maml:para>
+          <maml:para>Supported on: Windows Server 2008, Windows 7, Windows Vista, and Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetDisablePauseUXAccess -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetDisablePauseUXAccess</maml:name>
+        <maml:description>
+          <maml:para>This setting allows to remove access to "Pause updates" feature. Once enabled user access to pause updates is removed.</maml:para>
+          <maml:para>Supported on: At least Windows Server, Windows 10 Version 1809</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetDisableUXWUAccess -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetDisableUXWUAccess</maml:name>
+        <maml:description>
+          <maml:para>This setting allows you to remove access to scan Windows Update. If you enable this setting, Windows Update scan access is removed.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: RescheduleWaitTimeEnabled -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>RescheduleWaitTimeEnabled</maml:name>
+        <maml:description>
+          <maml:para>Specifies the amount of time for Automatic Updates to wait, following system startup, before proceeding with a scheduled installation that was missed previously.</maml:para>
+          <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: RescheduleWaitTime -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>RescheduleWaitTime</maml:name>
+        <maml:description>
+          <maml:para>Specifies the amount of time for Automatic Updates to wait, following system startup, before proceeding with a scheduled installation that was missed previously.</maml:para>
+          <maml:para>Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetActiveHoursMaxRange -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetActiveHoursMaxRange</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to specify the maximum number of hours from the start time that users can set their active hours. The max active hours range can be set between 8 and 18 hours.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ActiveHoursMaxRange -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ActiveHoursMaxRange</maml:name>
+        <maml:description>
+          <maml:para>Enable this policy to specify the maximum number of hours from the start time that users can set their active hours. The max active hours range can be set between 8 and 18 hours.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: UseUpdateClassPolicySource -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>UseUpdateClassPolicySource</maml:name>
+        <maml:description>
+          <maml:para>When this policy is enabled, devices will receive Windows updates for the classes listed from the specified update source: either Windows Update or Windows Server Update Service.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetPolicyDrivenUpdateSourceForFeatureUpdates -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetPolicyDrivenUpdateSourceForFeatureUpdates</maml:name>
+        <maml:description>
+          <maml:para>Configure this policy to specify whether to receive Windows Feature Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</maml:para>
+          <maml:para>Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetPolicyDrivenUpdateSourceForQualityUpdates -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetPolicyDrivenUpdateSourceForQualityUpdates</maml:name>
+        <maml:description>
+          <maml:para>Configure this policy to specify whether to receive Windows Quality Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</maml:para>
+          <maml:para>Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetPolicyDrivenUpdateSourceForDriverUpdates -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetPolicyDrivenUpdateSourceForDriverUpdates</maml:name>
+        <maml:description>
+          <maml:para>Configure this policy to specify whether to receive Windows Driver Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</maml:para>
+          <maml:para>Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetPolicyDrivenUpdateSourceForOtherUpdates -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetPolicyDrivenUpdateSourceForOtherUpdates</maml:name>
+        <maml:description>
+          <maml:para>Configure this policy to specify whether to receive Other Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</maml:para>
+          <maml:para>Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetActiveHours -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetActiveHours</maml:name>
+        <maml:description>
+          <maml:para>If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ActiveHoursStart -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ActiveHoursStart</maml:name>
+        <maml:description>
+          <maml:para>If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: ActiveHoursEnd -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ActiveHoursEnd</maml:name>
+        <maml:description>
+          <maml:para>If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server or Windows 10</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">int</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetAutoRestartNotificationDisable -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetAutoRestartNotificationDisable</maml:name>
+        <maml:description>
+          <maml:para>This policy setting allows you to control whether users receive notifications for auto restarts for update installations including reminder and warning notifications.</maml:para>
+          <maml:para>Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: EnableFeaturedSoftware -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>EnableFeaturedSoftware</maml:name>
+        <maml:description>
+          <maml:para>This policy setting allows you to control whether users see detailed enhanced notification messages about featured software from the Microsoft Update service.</maml:para>
+          <maml:para>Supported on: Windows Server 2008, Windows 7, and Windows Vista​</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <!-- Parameter: SetEDURestart -->
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SetEDURestart</maml:name>
+        <maml:description>
+          <maml:para>Enabling this policy for EDU devices that remain on Carts overnight will skip power checks to ensure update reboots will happen at the scheduled install time.</maml:para>
+          <maml:para>Supported on: At least Windows 10 Server, Windows 10 or Windows 10 RT​</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>

@@ -1,4 +1,6 @@
 # PSWindowsUpdate
+[![PSGallery Version](https://img.shields.io/powershellgallery/v/PSWindowsUpdate.svg?style=flat&logo=powershell&label=PSGallery%20Version)](https://www.powershellgallery.com/packages/PSWindowsUpdate) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/PSWindowsUpdate.svg?style=flat&logo=powershell&label=PSGallery%20Downloads)](https://www.powershellgallery.com/packages/PSWindowsUpdate) [![PSGallery Platform](https://img.shields.io/powershellgallery/p/PSWindowsUpdate.svg?style=flat&logo=powershell&label=PSGallery%20Platform)](https://www.powershellgallery.com/packages/PSWindowsUpdate)
+
 This module contain cmdlets to manage Windows Update Client.
 
 ## Table of Contents

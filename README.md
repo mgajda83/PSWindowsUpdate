@@ -1,6 +1,18 @@
 # PSWindowsUpdate
 This module contain cmdlets to manage Windows Update Client.
 
+## Table of Contents
+- [PSWindowsUpdate](#PSWindowsUpdate)
+- [Release Notes](#Release-Notes)
+- [Install module from the PowerShell Gallery](#Install-module-from-the-PowerShell-Gallery)
+- [Usage and Examples](#Usage-and-Examples)
+  - [Get-WindowsUpdate / Install-WindowsUpdate](#Get-WindowsUpdate-/-Install-WindowsUpdate)
+  - [Add-WUServiceManager](#Add-WUServiceManager)
+  - [Get-WUHistory](#Get-WUHistory)
+  - [Remove-WindowsUpdate](#Remove-WindowsUpdate)
+  - [Get-WUSettings / Set-WUSettings](#-WUSettings-/-Set-WUSettings)
+- [Support](#Support)
+
 # Release Notes
 v2.2.1  
 - Set-WUSettings added params to control TargetRelease for control Feature Updates version and Windows Update for Business

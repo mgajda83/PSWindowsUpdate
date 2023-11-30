@@ -37,4 +37,75 @@ Import the module:
 ```PowerShell
 Import-Module PSWindowsUpdate
 ```
+### Get-WindowsUpdate / Install-WindowsUpdate
+Get windows updates available from default service manager.
+```PowerShell
+Get-WindowsUpdate
+```
 
+Get all available update on remote machine MG-PC, that contains in Title this two words 'Aktualizacja' and 'Windows 11' (as regular expression).
+```PowerShell
+Get-WindowsUpdate -ComputerName MG-PC -MicrosoftUpdate -Title "Aktualizacja.*Windows 11" -Verbose
+```
+
+Hide update with KBArticleID: KB4034658.
+```PowerShell
+Get-WindowsUpdate -KBArticleID KB4034658 -Hide -Verbose
+```
+...or use alias
+```PowerShell
+Hide-WindowsUpdate -KBArticleID KB4034658 -Verbose
+```
+
+Schedule job at 6:00 PM to install update with UpdateId='ddb74579-7a1f-4d1f-80c8-e8647055314e' and RevisionNumber=200. Update will be automaticaly accepted and after all serwer will be automaticaly restarted if needed.
+```PowerShell
+Get-WindowsUpdate -MicrosoftUpdate -UpdateID ddb74579-7a1f-4d1f-80c8-e8647055314e -RevisionNumber 200 -ScheduleJob (Get-Date -Hour 18 -Minute 0 -Second 0) -Install -AcceptAll -AutoReboot -Verbose
+```
+...or use alias
+```PowerShell
+Install-WindowsUpdate -MicrosoftUpdate -UpdateID ddb74579-7a1f-4d1f-80c8-e8647055314e -RevisionNumber 200 -ScheduleJob (Get-Date -Hour 18 -Minute 0 -Second 0) -AcceptAll -AutoReboot -Verbose
+```
+
+### Add-WUServiceManager
+Try register Microsoft Update service as Service Manager.
+```PowerShell
+Add-WUServiceManager -MicrosoftUpdate
+```
+
+Try register Offline Sync Service from file C:\wsusscn2.cab.
+```PowerShell
+Add-WUServiceManager -ScanFileLocation C:\wsusscn2.cab
+```
+
+### Get-WUHistory
+Get Windows Update history.
+```PowerShell
+Get-WUHistory
+```
+
+Get Windows Update Agent history for last 24h.
+```PowerShell
+Get-WUHistory -MaxDate (Get-Date).AddDays(-1)
+```
+
+### Remove-WindowsUpdate
+Try to uninstall update with specific KBArticleID = KB958830.
+```PowerShell
+Get-WUUninstall -KBArticleID KB958830
+```
+
+### Get-WUSettings / Set-WUSettings
+Get current Windows Update Client configuration.
+```PowerShell
+Get-WUSettings
+```
+
+Set the target version for feature updates to Windows 10 22H2.
+```PowerShell
+Set-WUSettings -TargetReleaseVersion -TargetReleaseVersionInfo 22H2 -ProductVersion "Windows 10"
+```
+
+# Support
+I develop most of my code under open licenses, free of charge.
+If you are satisfied with these solutions, you can express your [support for me](https://github.com/mgajda83/PSWindowsUpdate/assets/47522674/da5e45e2-f73d-4190-96a3-c838208be9f2).
+The greater your support, the greater the motivation to develop them further. The more motivation, the more things I can create.

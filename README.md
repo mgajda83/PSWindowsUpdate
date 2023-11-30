@@ -19,6 +19,7 @@ This module contain cmdlets to manage Windows Update Client.
 v2.2.1  
 - Set-WUSettings added params to control TargetRelease for control Feature Updates version and Windows Update for Business
 - Fixes Remove-WindowsUpdate bug
+- Fixes Get-WUHistory bug
 
 v2.2.0  
 - New cmdlet Reset-WUComponents, for reset Windows Updates components to default

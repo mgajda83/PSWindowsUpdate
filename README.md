@@ -121,5 +121,5 @@ Set-WUSettings -TargetReleaseVersion -TargetReleaseVersionInfo 22H2 -ProductVers
 
 # Support
 I develop most of my code under open licenses, free of charge.
-If you are satisfied with these solutions, you can express your [support for me](https://github.com/mgajda83/PSWindowsUpdate/assets/47522674/da5e45e2-f73d-4190-96a3-c838208be9f2).
+If you are satisfied with these solutions, you can express your [support for me](https://www.paypal.com/donate/?hosted_button_id=JTUBKNG3EMEXY).
 The greater your support, the greater the motivation to develop them further. The more motivation, the more things I can create.

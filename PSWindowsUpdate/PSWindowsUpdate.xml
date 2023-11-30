@@ -3788,92 +3788,103 @@
             <summary>
             <para type="description">Enabled - The WSUS server distributes available signed non-Microsoft updates.</para>
             <para type="description">Disabled - The WSUS server does not distribute available signed non-Microsoft updates.</para>
+            <para type="description">Supported on: At least Windows Server 2003 operating systems or Windows XP Professional with SP1, excluding Windows RT</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.DisableWindowsUpdateAccess">
             <summary>
             <para type="description">Disables/Enables access to Windows Update.</para>
+            <para type="description">Supported on: At least Windows Server 2003 operating systems, Windows XP Professional Service Pack 1, or Windows 2000 Service Pack 3</para>
             </summary>
         </member>
-        <member name="P:PSWindowsUpdate.SetWUSettings.NonAdministratorsElevated">
+        <member name="P:PSWindowsUpdate.SetWUSettings.ElevateNonAdmins">
             <summary>
-            <para type="description">Enabled - All members of the Users security group can approve or disapprove updates.</para>
-            <para type="description">Disabled - Only members of the Administrators security group can approve or disapprove updates.</para>
+            <para type="description">This policy setting allows you to control whether non-administrative users will receive update notifications based on the "Configure Automatic Updates" policy setting.</para>
+            <para type="description">Supported on: At least Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above..</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.TargetGroup">
             <summary>
             <para type="description">Name of the computer group to which the computer belongs.</para>
+            <para type="description">Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.TargetGroupEnabled">
             <summary>
             <para type="description">Use/Do not use client-side targeting.</para>
+            <para type="description">Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.WUServer">
             <summary>
             <para type="description">HTTP(S) URL of the WSUS server that is used by Automatic Updates and API callers (by default).</para>
+            <para type="description">Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.NotificationLevel">
             <summary>
             <para type="description">Notify mode: "Not configured", "Disabled", "Notify before download", "Notify before installation", "Scheduled installation", "Users configure"</para>
+            <para type="description">Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 Option 7 only supported on servers of at least Windows Server 2016 edition​</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.AutoInstallMinorUpdates">
             <summary>
             <para type="description">Silently install minor updates.</para>
+            <para type="description">Supported on: At least Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above.</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.DetectionFrequency">
             <summary>
             <para type="description">Time between detection cycles. Time in hours (1–22).</para>
+            <para type="description">Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.DetectionFrequencyEnabled">
             <summary>
             <para type="description">Enable/Disable detection frequency.</para>
+            <para type="description">Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.IncludeRecommendedUpdates">
             <summary>
             <para type="description">Enable/Disable recommended updates.</para>
+            <para type="description">Supported on: At least Windows Vista through Windows 8.1 or Windows Server 2012 R2 with most current service pack. Not supported on Windows 10 and above.</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.NoAutoRebootWithLoggedOnUsers">
             <summary>
             <para type="description">Logged-on user can decide whether to restart the client computer.</para>
+            <para type="description">Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3​</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.NoAutoUpdate">
             <summary>
             <para type="description">Enable/Disable Automatic Updates.</para>
+            <para type="description">Supported on: Windows XP Professional Service Pack 1 or At least Windows 2000 Service Pack 3 Option 7 only supported on servers of at least Windows Server 2016 edition​</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.RebootRelaunchTimeout">
             <summary>
             <para type="description">Time between prompts for a scheduled restart. Time in minutes (1–1440).</para>
+            <para type="description">Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.RebootRelaunchTimeoutEnabled">
             <summary>
-            <para type="description">Enable/Disable RebootRelaunchTimeout.</para>
+            <para type="description">Specifies the amount of time for Automatic Updates to wait before prompting again with a scheduled restart.</para>
+            <para type="description">Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.RebootWarningTimeout">
             <summary>
             <para type="description">Length, in minutes, of the restart warning countdown after updates have been installed that have a deadline or scheduled updates. Time in minutes (1–30).</para>
+            <para type="description">Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3​</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.RebootWarningTimeoutEnabled">
             <summary>
             <para type="description">Enable/Disable RebootWarningTimeout.</para>
-            </summary>
-        </member>
-        <member name="P:PSWindowsUpdate.SetWUSettings.RescheduleWaitTime">
-            <summary>
-            <para type="description">Time in minutes that Automatic Updates waits at startup before it applies updates from a missed scheduled installation time. Time in minutes (1–60).</para>
+            <para type="description">Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3​</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.ScheduledInstallDay">
@@ -3891,21 +3902,263 @@
         <member name="P:PSWindowsUpdate.SetWUSettings.UseWUServer">
             <summary>
             <para type="description">The computer gets its updates from a WSUS server or from Microsoft Update.</para>
+            <para type="description">Supported on: At least Windows XP Professional Service Pack 1 or Windows 2000 Service Pack 3, excluding Windows RT</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.TargetReleaseVersion">
             <summary>
-            <para type="description">TargetReleaseVersion enable settings for controll maximum version of Feature updates. For example 1 or 0.</para>
+            <para type="description">Enable settings for control maximum version of Feature updates.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.TargetReleaseVersionInfo">
             <summary>
             <para type="description">TargetReleaseVersionInfo allow to control maximum version of Feature updates. For example "22H2".</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.ProductVersion">
             <summary>
             <para type="description">ProductVersion allow to control maximum version of Feature updates. For example "Windows 11" or "11" or "Windows 10".</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.DeferFeatureUpdatesPeriodInDays">
+            <summary>
+            <para type="description">Enable this policy to specify when to receive Feature Updates.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.DeferQualityUpdatesPeriodInDays">
+            <summary>
+            <para type="description">Enable this policy to specify when to receive quality updates.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.DisableWUfBSafeguards">
+            <summary>
+            <para type="description">This policy setting specifies that a Windows Update for Business device should skip safeguards.</para>
+            <para type="description">Supported on: At least Windows Server, Windows 10 Version 1903​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.ManagePreviewBuilds">
+            <summary>
+            <para type="description">Enable this policy to manage which updates you receive prior to the update being released to the world.</para>
+            <para type="description">0	Disable Preview builds.</para>
+            <para type="description">1	Disable Preview builds once the next release is public.</para>
+            <para type="description">2	Enable Preview builds.</para>
+            <para type="description">3 (Default) Preview builds is left to user selection.</para>
+            <para type="description">Supported on: At least Windows Server, Windows 10 Version 1709​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.AllowAutoWindowsUpdateDownloadOverMeteredNetwork">
+            <summary>
+            <para type="description">Enabling this policy will automatically download updates, even over metered data connections (charges may apply).</para>
+            <para type="description">Supported on: At least Windows 10 Server, Windows 10 or Windows 10 RT</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.AlwaysAutoRebootAtScheduledTime">
+            <summary>
+            <para type="description">If you enable this policy, a restart timer will always begin immediately after Windows Update installs important updates, instead of first notifying users on the login screen for at least two days..</para>
+            <para type="description">Supported on: At least Windows Server 2012, Windows 8 or Windows RT</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.AlwaysAutoRebootAtScheduledTimeMinutes">
+            <summary>
+            <para type="description">The restart timer can be configured to start with any value from 15 to 180 minutes. When the timer runs out, the restart will proceed even if the PC has signed-in users.</para>
+            <para type="description">Supported on: At least Windows Server 2012, Windows 8 or Windows RT​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetAutoRestartNotificationConfig">
+            <summary>
+            <para type="description">Specifies the type of notification used when notifying the user about a scheduled restart to install updates.</para>
+            <para type="description">Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.AutoRestartNotificationSchedule">
+            <summary>
+            <para type="description">Specifies the type of notification used when notifying the user about a scheduled restart to install updates.</para>
+            <para type="description">Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetAutoRestartRequiredNotificationDismissal">
+            <summary>
+            <para type="description">Enable this policy to specify the method by which the auto-restart required notification is dismissed. When a restart is required to install updates, the auto-restart required notification is displayed. By default, the notification is automatically dismissed after 25 seconds.</para>
+            <para type="description">Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.AutoRestartRequiredNotificationDismissal">
+            <summary>
+            <para type="description">Enable this policy to specify the method by which the auto-restart required notification is dismissed. When a restart is required to install updates, the auto-restart required notification is displayed. By default, the notification is automatically dismissed after 25 seconds.</para>
+            <para type="description">Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetRestartWarningSchd">
+            <summary>
+            <para type="description">Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline.</para>
+            <para type="description">Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.ScheduleRestartWarning">
+            <summary>
+            <para type="description">Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline. 2 Hours, 4 Hours (Default), 8 Hours, 12 Hours, 24 Hours.</para>
+            <para type="description">Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.ScheduleImminentRestartWarning">
+            <summary>
+            <para type="description">Enable this policy to control when notifications are displayed to warn users about a scheduled restart for the update installation deadline. 15 Minutes (Default), 30 Minutes or 60 Minutes.</para>
+            <para type="description">Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.DeferUpgrade">
+            <summary>
+            <para type="description">You can also choose to delay updates for up to one month. If you do not delay updates, your PC will remain up to date with security updates as they become available.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.DeferUpgradePeriod">
+            <summary>
+            <para type="description">Allows IT Admins to specify additional upgrade delays for up to 8 months. Supported values are 0-8, which refers to the number of months to defer upgrades.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.DeferUpdatePeriod">
+            <summary>
+            <para type="description">Allows IT Admins to specify update delays for up to four weeks. Supported values are 0-4, which refers to the number of weeks to defer updates.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.PauseDeferrals">
+            <summary>
+            <para type="description">Allows IT Admins to pause updates and upgrades for up to 5 weeks.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetUpdateNotificationLevel">
+            <summary>
+            <para type="description">This policy allows you to define what Windows Update notifications users see. This policy doesn't control how and when updates are downloaded and installed.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.UpdateNotificationLevel">
+            <summary>
+            <para type="description">This policy allows you to define what Windows Update notifications users see. This policy doesn't control how and when updates are downloaded and installed.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.NoAUShutdownOption">
+            <summary>
+            <para type="description">This policy setting allows you to manage whether the 'Install Updates and Shut Down' option is displayed in the Shut Down Windows dialog box.</para>
+            <para type="description">Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows XP SP2</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.AUPowerManagement">
+            <summary>
+            <para type="description">Specifies whether the Windows Update will use the Windows Power Management features to automatically wake up the system from sleep, if there are updates scheduled for installation.</para>
+            <para type="description">Supported on: Windows Server 2008, Windows 7, Windows Vista, and Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetDisablePauseUXAccess">
+            <summary>
+            <para type="description">This setting allows to remove access to "Pause updates" feature. Once enabled user access to pause updates is removed.</para>
+            <para type="description">Supported on: At least Windows Server, Windows 10 Version 1809</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetDisableUXWUAccess">
+            <summary>
+            <para type="description">This setting allows you to remove access to scan Windows Update. If you enable this setting, Windows Update scan access is removed.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.RescheduleWaitTimeEnabled">
+            <summary>
+            <para type="description">Specifies the amount of time for Automatic Updates to wait, following system startup, before proceeding with a scheduled installation that was missed previously.</para>
+            <para type="description">Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.RescheduleWaitTime">
+            <summary>
+            <para type="description">Specifies the amount of time for Automatic Updates to wait, following system startup, before proceeding with a scheduled installation that was missed previously.</para>
+            <para type="description">Supported on: Windows 7, Windows Server 2008 R2, Windows Vista, Windows Server 2003, Windows XP SP2, Windows XP SP1 , Windows 2000 SP4, Windows 2000 SP3</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetActiveHoursMaxRange">
+            <summary>
+            <para type="description">Enable this policy to specify the maximum number of hours from the start time that users can set their active hours. The max active hours range can be set between 8 and 18 hours.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.ActiveHoursMaxRange">
+            <summary>
+            <para type="description">Enable this policy to specify the maximum number of hours from the start time that users can set their active hours. The max active hours range can be set between 8 and 18 hours.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>        
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.UseUpdateClassPolicySource">
+            <summary>
+            <para type="description">When this policy is enabled, devices will receive Windows updates for the classes listed from the specified update source: either Windows Update or Windows Server Update Service.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetPolicyDrivenUpdateSourceForFeatureUpdates">
+            <summary>
+            <para type="description">Configure this policy to specify whether to receive Windows Feature Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</para>
+            <para type="description">Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetPolicyDrivenUpdateSourceForQualityUpdates">
+            <summary>
+            <para type="description">Configure this policy to specify whether to receive Windows Quality Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</para>
+            <para type="description">Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetPolicyDrivenUpdateSourceForDriverUpdates">
+            <summary>
+            <para type="description">Configure this policy to specify whether to receive Windows Driver Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</para>
+            <para type="description">Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetPolicyDrivenUpdateSourceForOtherUpdates">
+            <summary>
+            <para type="description">Configure this policy to specify whether to receive Other Updates from Windows Update endpoint, managed by Windows Update for Business policies, or through your configured Windows Server Update Service (WSUS) server.</para>
+            <para type="description">Supported on: At least Windows Server 2022, or Windows 10 Version 2004​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetActiveHours">
+            <summary>
+            <para type="description">If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.ActiveHoursStart">
+            <summary>
+            <para type="description">If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.ActiveHoursEnd">
+            <summary>
+            <para type="description">If you enable this policy, the PC will not automatically restart after updates during active hours. The PC will attempt to restart outside of active hours.</para>
+            <para type="description">Supported on: At least Windows 10 Server or Windows 10</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetAutoRestartNotificationDisable">
+            <summary>
+            <para type="description">This policy setting allows you to control whether users receive notifications for auto restarts for update installations including reminder and warning notifications.</para>
+            <para type="description">Supported on: Windows Server 2016 through Windows Server 2022, or Windows 10​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.EnableFeaturedSoftware">
+            <summary>
+            <para type="description">This policy setting allows you to control whether users see detailed enhanced notification messages about featured software from the Microsoft Update service.</para>
+            <para type="description">Supported on: Windows Server 2008, Windows 7, and Windows Vista​</para>
+            </summary>
+        </member>
+        <member name="P:PSWindowsUpdate.SetWUSettings.SetEDURestart">
+            <summary>
+            <para type="description">Enabling this policy for EDU devices that remain on Carts overnight will skip power checks to ensure update reboots will happen at the scheduled install time.</para>
+            <para type="description">Supported on: At least Windows 10 Server, Windows 10 or Windows 10 RT​</para>
             </summary>
         </member>
         <member name="P:PSWindowsUpdate.SetWUSettings.Debuger">

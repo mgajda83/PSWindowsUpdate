@@ -20,6 +20,7 @@ v2.2.1
 - Set-WUSettings added params to control TargetRelease for control Feature Updates version and Windows Update for Business
 - Fixed Remove-WindowsUpdate bug
 - Fixed Get-WUHistory bug
+- Fixed Get-WindowsUpdate sendreport bug
 
 v2.2.0  
 - New cmdlet Reset-WUComponents, for reset Windows Updates components to default

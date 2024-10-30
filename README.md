@@ -107,7 +107,7 @@ Get-WUHistory -MaxDate (Get-Date).AddDays(-1)
 ### Remove-WindowsUpdate
 Try to uninstall update with specific KBArticleID = KB958830.
 ```PowerShell
-Get-WUUninstall -KBArticleID KB958830
+Remove-WindowsUpdate -KBArticleID KB958830
 ```
 
 ### Get-WUSettings / Set-WUSettings
